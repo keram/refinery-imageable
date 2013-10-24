@@ -1,0 +1,133 @@
+(function (refinery) {
+
+    'use strict';
+
+    /**
+     * @constructor
+     * @extends {refinery.admin.Imageable}
+     * @param {Object=} options
+     */
+    refinery.Object.create({
+        name: 'Imageable',
+
+        module: 'admin',
+
+        init_list: function () {
+            var holder = this.holder,
+                list = holder.find('#imageable-list'),
+                images_dialog = refinery('admin.ImagesDialog');
+
+            function update_positions () {
+                list.find('input.position').each(function (i) {
+                    $(this).val(i + 1);
+                });
+            }
+
+            images_dialog.on('insert', function (img) {
+                var i = list.find('li').length;
+
+                list.html(list.html() + image_list(i, img));
+            });
+
+            images_dialog.on('load', function () {
+                images_dialog.holder.find('li[aria-controls="external-image-area"]').hide();
+            });
+
+            this.on('destroy', function () {
+                images_dialog.destroy();
+            });
+
+            holder.on('click', '.change', function () {
+                var images_dialog = refinery('admin.ImagesDialog'),
+                    li = $(this).closest('li'),
+                    lis = list.find('li'),
+                    i = lis.index(li);
+
+                images_dialog.on('insert', function (img) {
+                    li.find('img.preview').attr('src', img.thumbnail);
+                    li.find('input.alt').val(img.alt);
+                    li.find('input.caption').val(img.caption);
+                    li.find('input.image-id').val(img.id);
+                });
+
+                images_dialog.on('close', function () {
+                    images_dialog.destroy();
+                });
+
+                images_dialog.on('load', function () {
+                    images_dialog.holder.find('li[aria-controls="external-image-area"]').hide();
+                });
+
+                images_dialog.init().open();
+            });
+
+            holder.on('click', '.delete', function () {
+                $(this).closest('li').remove();
+
+                update_positions();
+            });
+
+            holder.on('click', '.add', function () {
+                images_dialog.init().open();
+            });
+
+            holder.on('click', 'input[type="checkbox"]', function () {
+                list.find('input[type="checkbox"]').not(this).each(function (){
+                    $(this).prop('checked', false);
+                });
+            });
+
+            list.sortable({
+                stop: function () {
+                    update_positions();
+                }
+            })
+        },
+
+        /**
+         * Handle uploaded image
+         *
+         * @expose
+         * @param {json_response} json_response
+         * @return {undefined}
+         */
+        init: function (holder) {
+            var list = holder.find('#imageable-list'),
+                images_dialog = refinery('admin.ImagesDialog');
+
+            if (this.is('initialisable')) {
+                this.is('initialising', true);
+                this.holder = holder;
+
+                this.init_list();
+
+                this.is({'initialised': true, 'initialising': false});
+                this.trigger('init');
+            }
+        }
+    });
+
+     var tpl = '';
+
+    $.get(refinery.admin.backend_path + '/imagenization/new', function (response) {
+        tpl = response;
+    });
+
+    function image_list (index, image) {
+        var local_tpl = tpl.replace(/{{thumbnail}}/g, image.thumbnail);
+        local_tpl = local_tpl.replace(/{{image_id}}/g, image.id);
+        local_tpl = local_tpl.replace(/{{image_alt}}/g, image.alt);
+        local_tpl = local_tpl.replace(/{{image_caption}}/g, image.caption);
+        local_tpl = local_tpl.replace(/{{i}}/g, index);
+        local_tpl = local_tpl.replace(/{{position}}/g, index + 1);
+
+        return local_tpl;
+    }
+
+    refinery.admin.ui.imageable = function (holder, ui) {
+        holder.find('#imageable').each (function () {
+            ui.addObject( refinery('admin.Imageable').init($(this)) );
+        });
+    };
+
+}(refinery));

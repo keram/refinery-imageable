@@ -1,0 +1,41 @@
+<li class="clearfix">
+  <div class="block-aside">
+  <% if image.present?  %>
+    <%= image_fu image, '225x225>', alt: image.title, class: 'preview' %>
+  <% else %>
+    &nbsp;
+  <% end %>
+  </div>
+  <div class="block-main">
+  <%= ff.fields_for :image do |fff| %>
+    <div class="field">
+      <%= refinery_form_field fff, :text_field, :alt,
+            label: true, html: { class: 'widest alt' } -%>
+    </div>
+    <div class="field">
+      <%= refinery_form_field fff, :text_field, :caption,
+            label: true, html: { class: 'widest caption' } -%>
+    </div>
+    <%= fff.hidden_field :id, class: 'image-id' %>
+  <% end -%>
+
+    <div>
+      <%= ff.check_box :featured %>
+      <%= ff.label :featured, class: 'stripped' %>
+      <%= ff.hidden_field :id %>
+      <%= ff.hidden_field :image_id, class: 'image-id' %>
+      <%= ff.text_field :position, class: 'position' %>
+      <div class="right-side">
+        <input type="button" class="button change" value="<%= t('change', scope: 'refinery.admin.imagenization.new') %>" />
+        <%= link_to t('delete', scope: 'refinery.admin.record'),
+                    refinery.admin_imagenization_path(ff.object),
+                    class: 'delete nojs-hide button',
+                    title: t('delete', scope: 'refinery.admin.pages'),
+                    data: {
+                      remote: true
+                    },
+                    method: :delete %>
+      </div>
+    </div>
+  </div>
+</li>

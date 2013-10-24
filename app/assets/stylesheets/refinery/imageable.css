@@ -1,0 +1,40 @@
+#imageable-bar {
+  padding: 10px;
+  clear: both;
+  background-color: #F2F2F2;
+}
+
+#imageable-list {
+  max-height: 80em;
+  overflow: auto;
+  margin-bottom: 0px;
+}
+
+#imageable-list li {
+  margin-bottom: 10px;
+  background: #fff;
+  padding: 10px;
+}
+
+#imageable {
+  background: #808080;
+  padding-top: 10px;
+}
+
+#imageable .block-aside {
+  width: 26.5%;
+}
+
+#imageable .block-main {
+  width: 73%;
+}
+
+#imageable .bar {
+  clear: both;
+  padding-top: 10px;
+}
+
+#imageable img {
+  display: block;
+}
+

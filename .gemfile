@@ -1,0 +1,14 @@
+gem 'mysql2'
+
+gem 'rails', '~> 4.0.0'
+gem 'railties', '~> 4.0.0'
+# gem 'devise', path: '../devise' #git: 'git://github.com/plataformatec/devise.git', branch: 'rails4'
+# gem 'database_cleaner', path: '../database_cleaner' #git: 'git://github.com/bmabey/database_cleaner.git', branch: 'master'
+# gem 'globalize', path: '../globalize3' #git: 'git://github.com/bmabey/database_cleaner.git', branch: 'master'
+gem 'seo_meta', path: '../seo_meta' #git: 'git://github.com/bmabey/database_cleaner.git', branch: 'master'
+#
+# gem 'decorators', path: '../decorators'
+#
+# gem 'routing-filter', path: '../routing-filter'
+# #gem 'i18n-iso639matrix', '~> 0.0.1', github: 'keram/i18n-iso639matrix'
+# #gem 'i18n-iso639matrix', '~> 0.0.1', path: '../i18n-iso639matrix'

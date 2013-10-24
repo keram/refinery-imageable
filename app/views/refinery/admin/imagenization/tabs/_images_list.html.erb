@@ -1,0 +1,5 @@
+<ul id="imageable-list" >
+<%= f.fields_for :imagenizations do |ff| %>
+  <%= render '/refinery/admin/imagenization/tabs/image', ff: ff, image: ff.object.image %>
+<% end -%>
+</ul>

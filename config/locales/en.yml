@@ -1,0 +1,23 @@
+en:
+  refinery:
+    plugins:
+      refinery_imageable:
+        title: Object Images
+        description: Object Images allows you to relate one or more images to any object in Refinery which makes it really easy for you to create simple image galleries with lightbox style popups on the front end object views.
+    admin:
+      pages:
+        tabs:
+          imageable: Images
+      imagenization:
+        tabs:
+          images_bar:
+            add: Add Image
+        new:
+          change: Change
+          remove: Remove
+  activerecord:
+    attributes:
+      refinery/imagenization:
+        alt: Alt
+        caption: Caption
+        featured: Featured
