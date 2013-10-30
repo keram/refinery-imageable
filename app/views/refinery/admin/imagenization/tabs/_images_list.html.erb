@@ -1,4 +1,5 @@
-<ul id="imageable-list" >
+<ul id="imageable-list"
+  data-new-imageable="<%= render_html_to_json_string('/refinery/admin/imagenization/tabs/new_image', locals: { object_name: f.object_name }) %>">
 <%= f.fields_for :imagenizations do |ff| %>
   <%= render '/refinery/admin/imagenization/tabs/image', ff: ff, image: ff.object.image %>
 <% end -%>

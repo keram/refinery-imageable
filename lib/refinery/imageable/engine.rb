@@ -9,38 +9,29 @@ module Refinery
 
       engine_name :refinery_imageable
 
-      def self.register(tab)
-        tab.name = 'imageable'
-        tab.partial = '/refinery/admin/imagenization/tabs/images'
-      end
-
       initializer "register refinery_imageable plugin" do
         Refinery::Core.config.register_admin_javascript 'refinery/imageable'
         Refinery::Core.config.register_admin_stylesheet 'refinery/imageable'
       end
 
-      initializer "require and attach imageables" do
+      initializer "monkey patch imageables" do
+        require 'refinery/imageable/extension'
+
+        Refinery::Imageable.imageables.each do |imageable|
+          require "refinery/imageable/#{imageable}"
+        end
+
         ActiveSupport.on_load(:active_record) do
-          require 'refinery/imageable/extension'
-          #Refinery::Image.send :belongs_to, :imageable, dependent: :destroy
-          #
-          #Refinery::Image.send :delegate [:alt, :caption], to: :image
+          Refinery::Imageable.monkey_patch_imageables
+        end
 
-          Refinery::Image.module_eval do
-          #  has_many :imagenizations, dependent: :destroy, foreign_key: :image_id
-          end
-
-
-          Refinery::Imageable.imageables.each do |imageable|
-            require "refinery/imageable/#{imageable}"
-          end
+        # Ensure that in dev mode after reload are imageables patched again
+        ActionDispatch::Callbacks.to_prepare do
+          Refinery::Imageable.monkey_patch_imageables
         end
       end
 
       config.after_initialize do
-        Refinery::Pages::Tab.register do |tab|
-          register tab
-        end
 
         if defined?(Refinery::Blog::Tab)
           Refinery::Blog::Tab.register do |tab|

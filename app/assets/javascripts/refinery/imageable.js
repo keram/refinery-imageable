@@ -15,12 +15,24 @@
         init_list: function () {
             var holder = this.holder,
                 list = holder.find('#imageable-list'),
-                images_dialog = refinery('admin.ImagesDialog');
+                images_dialog = refinery('admin.ImagesDialog'),
+                tpl = list.data('new-imageable');
 
             function update_positions () {
                 list.find('input.position').each(function (i) {
                     $(this).val(i + 1);
                 });
+            }
+
+            function image_list (index, image) {
+                var local_tpl = tpl.replace(/{{thumbnail}}/g, image.thumbnail);
+                local_tpl = local_tpl.replace(/{{image_id}}/g, image.id);
+                local_tpl = local_tpl.replace(/{{image_alt}}/g, image.alt);
+                local_tpl = local_tpl.replace(/{{image_caption}}/g, image.caption);
+                local_tpl = local_tpl.replace(/{{i}}/g, index);
+                local_tpl = local_tpl.replace(/{{position}}/g, index + 1);
+
+                return local_tpl;
             }
 
             images_dialog.on('insert', function (img) {
@@ -106,23 +118,6 @@
             }
         }
     });
-
-     var tpl = '';
-
-    $.get(refinery.admin.backend_path + '/imagenization/new', function (response) {
-        tpl = response;
-    });
-
-    function image_list (index, image) {
-        var local_tpl = tpl.replace(/{{thumbnail}}/g, image.thumbnail);
-        local_tpl = local_tpl.replace(/{{image_id}}/g, image.id);
-        local_tpl = local_tpl.replace(/{{image_alt}}/g, image.alt);
-        local_tpl = local_tpl.replace(/{{image_caption}}/g, image.caption);
-        local_tpl = local_tpl.replace(/{{i}}/g, index);
-        local_tpl = local_tpl.replace(/{{position}}/g, index + 1);
-
-        return local_tpl;
-    }
 
     refinery.admin.ui.imageable = function (holder, ui) {
         holder.find('#imageable').each (function () {

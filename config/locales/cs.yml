@@ -1,16 +1,19 @@
 cs:
   refinery:
-    plugins:
-      refinery_imageable:
-        title: Obrázky stránek
-        description: Obrázky stránek vám dovoli připojit jeden či více obrázků ke stránce v Refinery. Umožní tak jednoduše vytvářet například galerie s lightboxem na frontendu.
-    js:
-      admin:
-        imagenization:
-          add_caption: Přidat popisek
-          done: Hotovo
     admin:
+      pages:
+        tabs:
+          imageable: Obrázky
       imagenization:
         tabs:
           images_bar:
             add: Přidat obrázek
+          new_image:
+            change: Změňit
+            remove: Odstranit
+  activerecord:
+    attributes:
+      refinery/imagenization:
+        alt: Alternativní text
+        caption: Titulek
+        featured: Hlavní obrázek
