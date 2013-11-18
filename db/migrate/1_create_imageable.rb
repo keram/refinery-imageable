@@ -4,7 +4,7 @@ class CreateImageable < ActiveRecord::Migration
       t.integer :image_id, null: false
       t.integer :imageable_id, null: false
       t.string  :imageable_type, null: false
-      t.integer :position, null: false, default: 1
+      t.integer :position, null: false
       t.boolean :featured, null: false, default: false
     end
 

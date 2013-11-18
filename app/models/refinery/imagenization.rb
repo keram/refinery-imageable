@@ -6,6 +6,10 @@ module Refinery
 
     accepts_nested_attributes_for :image, allow_destroy: false
 
+    before_create { |item|
+      item.position = item.imageable.images.count if item.position.blank?
+    }
+
     default_scope { order('refinery_imagenizations.position ASC')}
   end
 end
