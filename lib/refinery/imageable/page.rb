@@ -2,9 +2,7 @@ module Refinery
   module Imageable
     module Page
       def self.patch
-        p "hey patch"
-
-        require 'refinery/page'
+        require 'refinery/page' unless defined?(Refinery::Page)
 
         Refinery::Page.send :is_imageable
 

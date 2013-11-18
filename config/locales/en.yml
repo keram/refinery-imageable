@@ -11,6 +11,8 @@ en:
           new_image:
             change: Change
             remove: Remove
+        new:
+          change: Change
   activerecord:
     attributes:
       refinery/imagenization:
