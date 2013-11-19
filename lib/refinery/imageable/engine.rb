@@ -32,13 +32,6 @@ module Refinery
       end
 
       config.after_initialize do
-
-        if defined?(Refinery::Blog::Tab)
-          Refinery::Blog::Tab.register do |tab|
-            register tab
-          end
-        end
-
         Refinery.register_engine Refinery::Imageable
       end
     end

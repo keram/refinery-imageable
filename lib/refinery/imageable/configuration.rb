@@ -4,7 +4,7 @@ module Refinery
 
     config_accessor :imageables
 
-    self.imageables = %w(page)
+    self.imageables = %w(page blog_post)
 
   end
 end

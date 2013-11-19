@@ -11,5 +11,7 @@ module Refinery
     }
 
     default_scope { order('refinery_imagenizations.position ASC')}
+
+    scope :featured, -> { where(featured: true)}
   end
 end

@@ -11,6 +11,13 @@ module Refinery
       end
 
       def monkey_patch_imageables
+
+        Refinery::Image.class_eval do
+          has_many :imagenizations, dependent: :destroy, as: :image
+
+          delegate :featured, to: :imagenizations
+        end
+
         imageables.each do |imageable|
           "Refinery::Imageable::#{imageable.camelize}".constantize.patch
         end
