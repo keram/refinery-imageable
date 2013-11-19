@@ -13,7 +13,8 @@
         module: 'admin',
 
         init_list: function () {
-            var holder = this.holder,
+            var that = this,
+                holder = that.holder,
                 list = holder.find('#imageable-list'),
                 images_dialog = refinery('admin.ImagesDialog'),
                 tpl = list.data('new-imageable');
@@ -25,14 +26,12 @@
             }
 
             function image_list (index, image) {
-                var local_tpl = tpl.replace(/{{thumbnail}}/g, image.thumbnail);
-                local_tpl = local_tpl.replace(/{{image_id}}/g, image.id);
-                local_tpl = local_tpl.replace(/{{image_alt}}/g, image.alt);
-                local_tpl = local_tpl.replace(/{{image_caption}}/g, image.caption);
-                local_tpl = local_tpl.replace(/{{i}}/g, index);
-                local_tpl = local_tpl.replace(/{{position}}/g, index);
-
-                return local_tpl;
+                return tpl.replace(/{{thumbnail}}/g, image.thumbnail)
+                    .replace(/{{image_id}}/g, image.id)
+                    .replace(/{{image_alt}}/g, image.alt)
+                    .replace(/{{image_caption}}/g, image.caption)
+                    .replace(/{{i}}/g, index)
+                    .replace(/{{position}}/g, index);
             }
 
             images_dialog.on('insert', function (img) {
@@ -45,7 +44,7 @@
                 images_dialog.holder.find('li[aria-controls="external-image-area"]').hide();
             });
 
-            this.on('destroy', function () {
+            that.on('destroy', function () {
                 images_dialog.destroy();
             });
 
@@ -62,13 +61,17 @@
                     li.find('input.image-id').val(img.id);
                 });
 
+                images_dialog.on('load', function () {
+                    images_dialog.holder.find('li[aria-controls="external-image-area"]').hide();
+                });
+
                 images_dialog.on('close', function () {
                     images_dialog.destroy();
                 });
 
-                images_dialog.on('load', function () {
-                    images_dialog.holder.find('li[aria-controls="external-image-area"]').hide();
-                });
+                that.on('destroy', function () {
+                    images_dialog.destroy();
+                })
 
                 images_dialog.init().open();
             });
@@ -104,9 +107,6 @@
          * @return {undefined}
          */
         init: function (holder) {
-            var list = holder.find('#imageable-list'),
-                images_dialog = refinery('admin.ImagesDialog');
-
             if (this.is('initialisable')) {
                 this.is('initialising', true);
                 this.holder = holder;
@@ -120,7 +120,7 @@
     });
 
     refinery.admin.ui.imageable = function (holder, ui) {
-        holder.find('#imageable').each (function () {
+        holder.find('#imageable').each(function () {
             ui.addObject( refinery('admin.Imageable').init($(this)) );
         });
     };
