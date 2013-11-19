@@ -23,6 +23,7 @@
 
 #imageable .block-aside {
   width: 26.5%;
+  min-width: 26.5%;
 }
 
 #imageable .block-main {
