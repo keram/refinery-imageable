@@ -24,7 +24,7 @@
       <%= ff.label :featured, class: 'stripped' %>
       <%= ff.hidden_field :id %>
       <%= ff.hidden_field :image_id, class: 'image-id' %>
-      <%= ff.text_field :position, class: 'position' %>
+      <%= ff.hidden_field :position, class: 'position' %>
       <div class="right-side">
         <input type="button" class="button change" value="<%= t('change', scope: 'refinery.admin.imagenization.new') %>" />
         <%= link_to t('delete', scope: 'refinery.admin.record'),

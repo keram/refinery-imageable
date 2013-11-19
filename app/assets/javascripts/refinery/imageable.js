@@ -20,7 +20,7 @@
 
             function update_positions () {
                 list.find('input.position').each(function (i) {
-                    $(this).val(i + 1);
+                    $(this).val(i);
                 });
             }
 
@@ -30,7 +30,7 @@
                 local_tpl = local_tpl.replace(/{{image_alt}}/g, image.alt);
                 local_tpl = local_tpl.replace(/{{image_caption}}/g, image.caption);
                 local_tpl = local_tpl.replace(/{{i}}/g, index);
-                local_tpl = local_tpl.replace(/{{position}}/g, index + 1);
+                local_tpl = local_tpl.replace(/{{position}}/g, index);
 
                 return local_tpl;
             }
