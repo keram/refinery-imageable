@@ -8,7 +8,8 @@ class CreateImageable < ActiveRecord::Migration
       t.boolean :featured, null: false, default: false
     end
 
-    add_index Refinery::Imagenization.table_name, [:imageable_id, :imageable_type], name: 'index_on_imageable_id_and_imageable_type'
+    add_index Refinery::Imagenization.table_name, [:imageable_id, :imageable_type],
+                name: 'index_on_imageable_id_and_imageable_type'
     add_index Refinery::Imagenization.table_name, [:image_id, :imageable_id, :imageable_type, :position],
                 unique: true, name: 'index_on_image_id_imageable_id_imageable_type_and_position'
   end

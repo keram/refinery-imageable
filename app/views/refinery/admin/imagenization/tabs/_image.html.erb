@@ -10,11 +10,11 @@
   <%= ff.fields_for :image do |fff| %>
     <div class="field">
       <%= refinery_form_field fff, :text_field, :alt,
-            label: true, html: { class: 'widest alt' } -%>
+                  label: true, html: { class: 'widest alt' } -%>
     </div>
     <div class="field">
       <%= refinery_form_field fff, :text_field, :caption,
-            label: true, html: { class: 'widest caption' } -%>
+                  label: true, html: { class: 'widest caption' } -%>
     </div>
     <%= fff.hidden_field :id, class: 'image-id' %>
   <% end -%>
