@@ -5,6 +5,7 @@ gemspec
 gem 'refinerycms-i18n', github: 'keram-refinery/refinerycms-i18n', branch: 'refinery_light'
 gem 'refinerycms-clientside', '~> 0.0.1', github: 'keram-refinery/refinerycms-clientside', branch: 'master'
 gem 'refinerycms-links', '~> 0.0.1', github: 'keram/refinerycms-links', branch: 'master'
+gem 'refinerycms-blog2', '~> 1.0.0', github: 'keram/refinerycms-blog2', branch: 'master'
 
 git 'git://github.com/keram-refinery/refinerycms.git', branch: 'refinery_light' do
   gem 'refinerycms'
@@ -39,9 +40,9 @@ end
 
 # Gems used only for assets and not required
 # in production environments by default.
-gem 'sass-rails', '~> 4.0.0'
-gem 'coffee-rails', '~> 4.0.0'
-gem 'uglifier', '~> 2.2.0'
+gem 'sass-rails', '~> 4.0.1'
+gem 'coffee-rails', '~> 4.0.1'
+gem 'uglifier', '~> 2.3.1'
 
 gem 'turbolinks'
 
