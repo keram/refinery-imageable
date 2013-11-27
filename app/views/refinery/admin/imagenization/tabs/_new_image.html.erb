@@ -20,11 +20,13 @@
       <input type="hidden" value="{{image_id}}" name="<%= object_name %>[imagenizations_attributes][{{i}}][image_attributes][id]" class="image-id">
    </div>
     <div>
-      <input type="hidden" value="0" name="<%= object_name %>[imagenizations_attributes][{{i}}][featured]">
-      <input type="checkbox" value="1" name="<%= object_name %>[imagenizations_attributes][{{i}}][featured]" id="<%= object_name %>_imagenizations_attributes_{{i}}_featured">
-      <label for="<%= object_name %>_imagenizations_attributes_{{i}}_featured" class="stripped">
-        <%= t('featured', scope: 'activerecord.attributes.refinery/imagenization') %>
-      </label>
+    <!--
+        <input type="hidden" value="0" name="<%= object_name %>[imagenizations_attributes][{{i}}][featured]">
+        <input type="checkbox" value="1" name="<%= object_name %>[imagenizations_attributes][{{i}}][featured]" id="<%= object_name %>_imagenizations_attributes_{{i}}_featured">
+        <label for="<%= object_name %>_imagenizations_attributes_{{i}}_featured" class="stripped">
+          <%= t('featured', scope: 'activerecord.attributes.refinery/imagenization') %>
+        </label>
+    -->
       <input type="hidden" value="{{image_id}}" name="<%= object_name %>[imagenizations_attributes][{{i}}][image_id]" class="image-id" >
       <input type="hidden" value="{{position}}" name="<%= object_name %>[imagenizations_attributes][{{i}}][position]" class="position" >
       <div class="right-side">
