@@ -116,6 +116,8 @@
                 this.is({'initialised': true, 'initialising': false});
                 this.trigger('init');
             }
+
+            return this;
         }
     });
 
