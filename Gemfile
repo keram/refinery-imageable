@@ -29,20 +29,11 @@ platforms :ruby do
   gem 'pg'
 end
 
-group :development, :test do
-  platforms :ruby do
-    require 'rbconfig'
-    if RbConfig::CONFIG['target_os'] =~ /linux/i
-      gem 'therubyracer', '~> 0.12.0'
-    end
-  end
-end
-
 # Gems used only for assets and not required
 # in production environments by default.
 gem 'sass-rails', '~> 4.0.1'
 gem 'coffee-rails', '~> 4.0.1'
-gem 'uglifier', '~> 2.3.1'
+gem 'uglifier', '~> 2.4.0'
 
 gem 'turbolinks'
 
