@@ -13,7 +13,7 @@ module Refinery
       def monkey_patch_imageables
 
         Refinery::Image.class_eval do
-          has_many :imagenizations, dependent: :destroy, as: :image
+          has_many :imagenizations, dependent: :destroy
 
           delegate :featured, to: :imagenizations
         end
