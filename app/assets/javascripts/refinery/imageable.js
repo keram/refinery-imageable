@@ -17,7 +17,7 @@
                 holder = that.holder,
                 list = holder.find('#imageable-list'),
                 images_dialog = refinery('admin.ImagesDialog'),
-                tpl = list.data('new-imageable');
+                tpl = list.data('new-imageable')[0];
 
             function update_positions () {
                 list.find('input.position').each(function (i) {
@@ -36,7 +36,7 @@
 
             images_dialog.on('insert', function (img) {
                 var i = list.find('li').length;
-
+                console.log('insert: ', image_list(i, img));
                 list.html(list.html() + image_list(i, img));
             });
 
