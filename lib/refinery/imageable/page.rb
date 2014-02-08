@@ -10,7 +10,7 @@ module Refinery
 
           patch_model
           patch_controllers
-          patch_presenters_views
+          register_pages_tab
         end
 
         private
@@ -43,15 +43,7 @@ module Refinery
           end
         end
 
-        def patch_presenters_views
-          options = Refinery::Imageable.imageables_image_options[:page] || {}
-
-          Refinery::Pages.add_section_extra :before, :body, :imageable_images do |page|
-            Refinery::ImageableImagesPresenter.new(page, (options[:before_body] || {}).merge(
-                position: :before_body
-              ))
-          end unless Refinery::Pages.get_extras(:before, :body)[:imageable_images].present?
-
+        def register_pages_tab
           Refinery::Pages::Tab.register do |tab|
             tab.name = 'imageable'
             tab.partial = '/refinery/admin/imagenization/tabs/images'

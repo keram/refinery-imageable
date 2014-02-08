@@ -2,16 +2,14 @@ module Refinery
   module Imageable
     include ActiveSupport::Configurable
 
-    config_accessor :imageables, :imageables_image_options
+    config_accessor :imageables, :featured_image_options
 
     self.imageables = %w(page)
 
-    self.imageables_image_options = {
-      page: {
-        before_body: {
-          geometry: '700x',
-          caption: true
-        }
+    self.featured_image_options = {
+      default: {
+        geometry: '960x',
+        caption: true
       }
     }
 

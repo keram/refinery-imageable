@@ -1,0 +1,14 @@
+<%
+  options = Refinery::Imageable.featured_image_options[:default].merge(
+    Refinery::Imageable.featured_image_options.fetch("#{snippet.position_to_part}_#{snippet.page_part.title}".to_sym, {}))
+
+  image = snippet.page_part.page.images.first
+  img_buffer = ActiveSupport::SafeBuffer.new
+  img_buffer << image_tag(
+    image.thumbnail(geometry: options[:geometry]).url, {
+    alt: image.title
+  })
+
+  img_buffer << content_tag(:figcaption, image.caption) if options[:caption] && image.caption.present?
+%>
+<%= content_tag(:figure, img_buffer, class: 'featured-image') %>

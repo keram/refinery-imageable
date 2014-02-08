@@ -1,14 +1,18 @@
 Refinery::Imageable.configure do |config|
   # config.imageables = <%= Refinery::Imageable.imageables.inspect %>
 
+  # Usage:
+  #
   # {
-  #   page: {
-  #     before_body: {
-  #       geometry: '700x',
-  #       caption: true
-  #     }
+  #   default: {
+  #     geometry: '700x',
+  #     caption: true
+  #   },
+  #   before_body: {
+  #     geometry: '400',
+  #     caption: false
   #   }
   # }
-  # config.imageables_image_options = <%= Refinery::Imageable.imageables_image_options.inspect %>
+  # config.featured_image_options = <%= Refinery::Imageable.featured_image_options.inspect %>
 
 end
