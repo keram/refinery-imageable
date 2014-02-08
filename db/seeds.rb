@@ -3,7 +3,8 @@ if defined? Refinery::Snippets
 
   featured_image_snippet = Refinery::Snippet.where(
     title: 'Featured Image',
-    snippet_type: 'template'
+    snippet_type: 'template',
+    canonical_friendly_id: 'featured-image'
   ).first_or_initialize
 
   featured_image_snippet.update_attributes(body: '/refinery/snippets/featured_image') if featured_image_snippet.body.blank?

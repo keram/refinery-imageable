@@ -1,14 +1,18 @@
 <%
-  options = Refinery::Imageable.featured_image_options[:default].merge(
-    Refinery::Imageable.featured_image_options.fetch("#{snippet.position_to_part}_#{snippet.page_part.title}".to_sym, {}))
+  featured_imageable = snippet.page_part.page.imagenizations.featured.includes(:image).joins(:image).limit(1)
 
-  image = snippet.page_part.page.images.first
-  img_buffer = ActiveSupport::SafeBuffer.new
-  img_buffer << image_tag(
-    image.thumbnail(geometry: options[:geometry]).url, {
-    alt: image.title
-  })
+  if featured_imageable.any?
+    options = Refinery::Imageable.featured_image_options[:default].merge(
+      Refinery::Imageable.featured_image_options.fetch("#{snippet.position_to_part}_#{snippet.page_part.title}".to_sym, {}))
 
-  img_buffer << content_tag(:figcaption, image.caption) if options[:caption] && image.caption.present?
+    image = featured_imageable.first.image
+    img_buffer = ActiveSupport::SafeBuffer.new
+    img_buffer << image_tag(
+      image.thumbnail(geometry: options[:geometry]).url, {
+      alt: image.title
+    })
+
+    img_buffer << content_tag(:figcaption, image.caption) if options[:caption] && image.caption.present?
+  end
 %>
-<%= content_tag(:figure, img_buffer, class: 'featured-image') %>
+<%= content_tag(:figure, img_buffer, class: 'featured-image') if featured_imageable.any? %>
