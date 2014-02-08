@@ -37,8 +37,7 @@ gem 'uglifier', '~> 2.4.0'
 
 gem 'turbolinks'
 
-gem 'jquery-rails', '~> 3.0.4'
-gem 'jquery-ui-rails', '~> 4.1.0'
+gem 'jquery-rails', '~> 3.1.0'
 gem 'i18n-iso639matrix', '~> 0.0.1', github: 'keram/i18n-iso639matrix', branch: 'master'
 
 
