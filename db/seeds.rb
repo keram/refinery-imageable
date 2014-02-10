@@ -7,5 +7,10 @@ if defined? Refinery::Snippets
     canonical_friendly_id: 'featured-image'
   ).first_or_initialize
 
-  featured_image_snippet.update_attributes(body: '/refinery/snippets/featured_image') if featured_image_snippet.body.blank?
+  Globalize.with_locales(Refinery::I18n.frontend_locales) do |locale|
+    featured_image_snippet.update_attributes(
+      body: '/refinery/snippets/featured_image',
+      title: featured_image_snippet.title
+    )
+  end
 end
